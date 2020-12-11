@@ -29,6 +29,9 @@ module.exports = {
     async createPost(parent, { body }, ctx, info) {
       const user = checkAuth(ctx);
       console.log("THIS IS createPOST Mutation: ", user);
+      if(!body.length){
+        throw new Error('Post must not be empty')
+      }
       const newPost = await Post.create({
         body,
         user: user.indexOf,
